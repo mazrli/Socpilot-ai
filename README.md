@@ -20,6 +20,24 @@ The current focus is on:
 
 SOCPilot is currently a lab project, not a production security platform.
 
+
+## New Lab Goal: Log Analysis
+
+A core goal of SOCPilot is to test how local AI models can support log analysis in a controlled lab environment.
+
+The project will use synthetic or anonymized logs to evaluate whether local models can:
+
+- summarize log events
+- identify suspicious indicators
+- detect repeated failed login attempts
+- recognize possible brute-force behavior
+- highlight unusual source IPs
+- estimate risk level
+- suggest next investigation steps
+- explain what additional information is missing
+
+The first log source used in the lab is SSH authentication logs. Future tests may include NGINX, ModSecurity, HAProxy and Windows Event Logs.
+
 ## Scope
 
 SOCPilot currently focuses on manual testing using synthetic or anonymized log data.
@@ -126,6 +144,12 @@ Return:
 - Windows Event Log summarization
 - threat intelligence enrichment
 - RAG against internal security documentation
+
+## Log Analysis Documentation
+
+The log analysis use case is documented here:
+
+- [Log Analysis](docs/log-analysis.md)
 
 ## Security and Privacy
 
