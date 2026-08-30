@@ -1,4 +1,4 @@
-# SOCPilot
+# SOCPilot (Security Operations Center)
 
 SOCPilot is a local AI lab and proof of concept for testing how locally hosted AI models can support SOC-style log analysis, incident investigation and private data analysis.
 
