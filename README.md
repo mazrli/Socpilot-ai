@@ -1,4 +1,4 @@
-@'
+
 # SOCPilot
 
 SOCPilot is a local AI lab for SOC support, security log analysis and incident response experimentation.
@@ -109,4 +109,3 @@ The lab environment is operational with:
 ## Disclaimer
 
 SOCPilot is an experimental lab project. It is not intended to replace security analysts, SIEM platforms or incident response processes. The purpose is to evaluate how local AI can support security work in a controlled environment.
-'@ | Set-Content -Encoding UTF8 README.md
