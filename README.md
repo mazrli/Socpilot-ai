@@ -127,6 +127,13 @@ Return:
 - threat intelligence enrichment
 - RAG against internal security documentation
 
+
+## Log Analysis Documentation
+
+The log analysis use case is documented here:
+
+- [Log Analysis](docs/log-analysis.md)
+
 ## Security and Privacy
 
 SOCPilot follows a local-first approach:
