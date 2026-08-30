@@ -1,0 +1,23 @@
+@"
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+.vscode/
+.idea/
+
+# Logs
+*.log
+
+# Secrets
+.env
+*.key
+*.pem
+*.pfx
+*.crt
+
+# Temporary files
+tmp/
+temp/
+"@ | Set-Content -Encoding UTF8 .gitignore
