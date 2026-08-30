@@ -1,12 +1,24 @@
 # SOCPilot
 
-SOCPilot is not a finished security product. It is a local AI lab and proof of concept where I test how locally hosted models can support security log analysis, SOC-style workflows and incident investigation without sending data to external AI services.
+SOCPilot is a local AI lab and proof of concept for testing how locally hosted AI models can support SOC-style log analysis, incident investigation and private data analysis.
 
-The project is focused on learning, testing and technical validation of local AI capabilities in a cybersecurity context.
+The project is not a finished security product. It is a controlled technical lab focused on learning, testing and validating local AI capabilities in a cybersecurity context.
+
+The current implementation uses Ollama and Open WebUI, but the architecture is not limited to one runtime. Future testing may compare other local or self-hosted inference options such as llama.cpp, vLLM, LocalAI, Hugging Face Text Generation Inference and LM Studio.
+
+The core principle is:
+
+```text
+Keep data local.
+Use AI as decision support.
+Let humans verify the result.
+```
+
+SOCPilot starts with practical experiments using synthetic or anonymized logs, beginning with SSH authentication log analysis and later expanding toward NGINX, ModSecurity, HAProxy, Windows Event Logs, RAG and internal documentation search.
 
 ## Purpose
 
-The purpose of SOCPilot is to explore, test and document how local AI models can be used as decision support in cybersecurity-related tasks.
+The purpose of SOCPilot is to explore, test and document how local AI models can be used as decision support for cybersecurity-related tasks and private data analysis.
 
 The current focus is on:
 
@@ -15,17 +27,17 @@ The current focus is on:
 - incident summarization
 - suspicious pattern detection
 - local AI-assisted investigation
+- private data analysis
 - prompt testing for incident analysis
 - future RAG experiments against documentation and threat intelligence
 
 SOCPilot is currently a lab project, not a production security platform.
 
-
 ## New Lab Goal: Log Analysis
 
 A core goal of SOCPilot is to test how local AI models can support log analysis in a controlled lab environment.
 
-The project will use synthetic or anonymized logs to evaluate whether local models can:
+The project uses synthetic or anonymized logs to evaluate whether local models can:
 
 - summarize log events
 - identify suspicious indicators
@@ -37,6 +49,24 @@ The project will use synthetic or anonymized logs to evaluate whether local mode
 - explain what additional information is missing
 
 The first log source used in the lab is SSH authentication logs. Future tests may include NGINX, ModSecurity, HAProxy and Windows Event Logs.
+
+## Private Data Analysis
+
+SOCPilot also explores how locally hosted AI models can support analysis of private or sensitive data in a controlled environment.
+
+The key idea is that sensitive logs, notes or documents can be analyzed locally without sending them to external AI services.
+
+Possible use cases include:
+
+- internal log analysis
+- private documentation review
+- incident note summarization
+- operational data analysis
+- support case classification
+- local knowledge search
+- future RAG against internal documents
+
+Local processing improves control over data, but it still requires proper security controls, anonymization where needed and critical review of AI-generated output.
 
 ## Scope
 
@@ -62,6 +92,20 @@ Future tests may include:
 - Open WebUI
 - Local AI models
 - Local network access only
+
+## Runtime Flexibility
+
+Ollama is used in the current phase because it is simple and practical for local experimentation.
+
+However, SOCPilot is not designed around one specific runtime. The architecture can later be tested with other local or self-hosted inference options, such as:
+
+- llama.cpp
+- vLLM
+- LocalAI
+- Hugging Face Text Generation Inference
+- LM Studio
+
+The goal is to understand how different runtimes compare in terms of hardware usage, model support, API compatibility, performance and security boundaries.
 
 ## Current Models
 
@@ -142,6 +186,8 @@ Return:
 - ModSecurity alert analysis
 - HAProxy log review
 - Windows Event Log summarization
+- private documentation analysis
+- operational data analysis
 - threat intelligence enrichment
 - RAG against internal security documentation
 
@@ -225,6 +271,8 @@ The lab environment is operational with:
 - SOCPilot name configured in the UI
 - initial SSH log analysis prompt created
 - synthetic SSH log sample added
+- log analysis documentation added
+- security boundaries documented
 
 ## Next Steps
 
@@ -232,6 +280,7 @@ The lab environment is operational with:
 - document installation steps
 - add more example prompts
 - evaluate stronger multilingual models
+- test other local inference runtimes
 - test RAG with local documentation
 - define safe workflows for SOC-style investigations
 - explore future integration with SIEM exports
@@ -244,6 +293,7 @@ SOCPilot
 ├── docs
 │   ├── architecture.md
 │   ├── installation.md
+│   ├── log-analysis.md
 │   └── security.md
 ├── examples
 │   └── ssh-auth-log-sample.txt
