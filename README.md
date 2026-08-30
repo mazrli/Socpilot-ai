@@ -274,6 +274,29 @@ The lab environment is operational with:
 - log analysis documentation added
 - security boundaries documented
 
+## Screenshot
+
+Current SOCPilot lab interface running locally through Open WebUI with a local model.
+
+![SOCPilot local AI lab interface](docs/images/socpilot-ui.png)
+
+
+## Hybrid AI Analysis Mode
+
+SOCPilot is designed as a local-first AI lab.
+
+Sensitive logs and private data should be analyzed using local models only.
+
+Cloud models such as Claude or GPT-5 may be used only for:
+
+- synthetic logs
+- anonymized logs
+- test data
+- benchmarking
+- comparing local and cloud model responses
+
+The goal is to keep sensitive data local while still allowing controlled comparison with stronger cloud models when the data is safe to share.
+
 ## Next Steps
 
 - test analysis against more log formats
