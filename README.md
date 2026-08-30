@@ -1,13 +1,12 @@
-
 # SOCPilot
 
-SOCPilot is a local AI lab for SOC support, security log analysis and incident response experimentation.
+SOCPilot is not a finished security product. It is a local AI lab and proof of concept where I test how locally hosted models can support security log analysis, SOC-style workflows and incident investigation without sending data to external AI services.
 
-The project explores how local AI models can support security analysts by summarizing logs, identifying suspicious patterns and providing structured investigation guidance without sending data to external AI services.
+The project is focused on learning, testing and technical validation of local AI capabilities in a cybersecurity context.
 
 ## Purpose
 
-The purpose of SOCPilot is to test how local AI can be used as decision support within security operations.
+The purpose of SOCPilot is to explore, test and document how local AI models can be used as decision support in cybersecurity-related tasks.
 
 The current focus is on:
 
@@ -16,9 +15,26 @@ The current focus is on:
 - incident summarization
 - suspicious pattern detection
 - local AI-assisted investigation
-- future RAG against internal documentation and threat intelligence
+- prompt testing for incident analysis
+- future RAG experiments against documentation and threat intelligence
 
 SOCPilot is currently a lab project, not a production security platform.
+
+## Scope
+
+SOCPilot currently focuses on manual testing using synthetic or anonymized log data.
+
+The first test scenario is SSH authentication log analysis, where the model is asked to summarize events, identify suspicious indicators and suggest what should be checked next.
+
+Future tests may include:
+
+- NGINX access and error logs
+- ModSecurity alerts
+- HAProxy logs
+- Windows Event Logs
+- internal security documentation
+- threat intelligence enrichment
+- RAG-based security knowledge search
 
 ## Current Stack
 
@@ -49,21 +65,56 @@ Browser
 
 The AI model runs locally. No prompts, logs or documents are sent to external AI providers.
 
+## Network
+
+Current local access:
+
+```text
+Client device
+  -> http://SERVER-IP:3000
+    -> Open WebUI / SOCPilot
+      -> Ollama
+        -> Local model
+```
+
+Default ports:
+
+| Service | Port | Purpose |
+|---|---:|---|
+| SSH | 22 | Remote server management |
+| Open WebUI | 3000 | Web interface |
+| Ollama | 11434 | Local model API |
+
+The environment is intended for local network use only.
+
 ## Initial Use Case
 
 The first use case is manual analysis of SSH authentication logs.
 
+Example log data:
+
+```text
+Aug 29 21:10:02 server sshd[1021]: Failed password for invalid user admin from 185.10.20.33 port 51222 ssh2
+Aug 29 21:10:05 server sshd[1022]: Failed password for invalid user root from 185.10.20.33 port 51223 ssh2
+Aug 29 21:10:09 server sshd[1023]: Failed password for testuser from 185.10.20.33 port 51224 ssh2
+Aug 29 21:12:40 server sshd[1044]: Accepted password for testuser from 192.168.1.20 port 50110 ssh2
+```
+
 Example prompt:
 
 ```text
-Analyze these SSH logs as a SOC analyst.
+You are a SOC analyst.
+
+Analyze the following security logs.
 
 Return:
-1. Summary
+1. Executive summary
 2. Suspicious indicators
-3. Risk level
-4. Recommended actions
-5. What should be checked next
+3. Possible attack pattern
+4. Risk level: Low / Medium / High
+5. Recommended actions
+6. What should be checked next
+7. What information is missing
 ```
 
 ## Planned Use Cases
@@ -73,19 +124,71 @@ Return:
 - ModSecurity alert analysis
 - HAProxy log review
 - Windows Event Log summarization
-- Threat intelligence enrichment
+- threat intelligence enrichment
 - RAG against internal security documentation
 
-## Security Principles
+## Security and Privacy
 
 SOCPilot follows a local-first approach:
 
-- no external AI API required
-- no direct internet exposure
-- no autonomous execution of actions
-- AI is used only as decision support
-- human review remains required
-- logs and prompts should be handled according to data classification
+- models run locally
+- no external AI API is required
+- test data should be synthetic or anonymized
+- no production logs should be committed to the repository
+- no passwords, keys, certificates or internal system details should be included
+- the system should not be exposed directly to the internet
+
+## Security Boundary
+
+The current lab is intended for local network use only.
+
+```text
+Local Network Only
+No public internet exposure
+No port forwarding
+```
+
+## Do Not Publish
+
+The following data must not be committed to this repository:
+
+- real production logs
+- real internal IP addresses
+- usernames from real environments
+- internal domain names
+- passwords
+- API keys
+- SSH keys
+- certificates
+- `.env` files
+- screenshots containing sensitive information
+
+## AI Usage Boundary
+
+The AI model should only provide analysis and recommendations.
+
+It should not:
+
+- execute commands
+- modify systems
+- change firewall rules
+- create accounts
+- change permissions
+- perform automated incident response actions
+
+Any operational action must be reviewed and executed by a human or by an approved automation workflow.
+
+## Limitations
+
+SOCPilot is not designed to replace:
+
+- SOC analysts
+- SIEM platforms
+- incident response processes
+- security monitoring tools
+- human decision-making
+
+AI output must be reviewed critically. The model may produce incomplete, incorrect or misleading analysis.
 
 ## Current Status
 
@@ -96,16 +199,34 @@ The lab environment is operational with:
 - local models downloaded
 - Open WebUI configured as the user interface
 - SOCPilot name configured in the UI
+- initial SSH log analysis prompt created
+- synthetic SSH log sample added
 
 ## Next Steps
 
 - test analysis against more log formats
 - document installation steps
-- add example prompts
+- add more example prompts
 - evaluate stronger multilingual models
 - test RAG with local documentation
 - define safe workflows for SOC-style investigations
+- explore future integration with SIEM exports
+
+## Repository Structure
+
+```text
+SOCPilot
+├── README.md
+├── docs
+│   ├── architecture.md
+│   ├── installation.md
+│   └── security.md
+├── examples
+│   └── ssh-auth-log-sample.txt
+└── prompts
+    └── soc-log-analysis.md
+```
 
 ## Disclaimer
 
-SOCPilot is an experimental lab project. It is not intended to replace security analysts, SIEM platforms or incident response processes. The purpose is to evaluate how local AI can support security work in a controlled environment.
+SOCPilot is an experimental project for learning and technical evaluation. It is not intended for production use without further security review, hardening, validation and governance.
